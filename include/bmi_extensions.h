@@ -1,3 +1,13 @@
+/**
+ * @file bmi_extensions.h
+ * @author Nels Frazier (nfrazier@lynker.com)
+ * @brief Managed BMI extensions interface.
+ * @version 0.1
+ * @date 2024-03-07
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 
 /*
  * These are BMI exentension functions developed to support the NGen modeling framework

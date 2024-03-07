@@ -1,3 +1,14 @@
+/**
+ * @file bmi_extensions.c
+ * @author Nels Frazier (nfrazier@lynker.com)
+ * @brief Managed BMI extensions.
+ * @version 0.1
+ * @date 2024-03-07
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #include "bmi_extensions.h"
 
 void* create_extension(Extension* extension, enum ExtensionType type)
