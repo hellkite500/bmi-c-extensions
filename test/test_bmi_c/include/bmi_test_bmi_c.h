@@ -6,6 +6,13 @@ extern "C" {
 #endif
 
 #include "bmi.h"
+/*
+ * Bmi Extensions
+ */
+#include "bmi_extensions.h"
+#include "extra_extension.h"
+/* end BMI extensions */
+
 #include "test_bmi_c.h"
 
     /**
@@ -51,6 +58,20 @@ extern "C" {
     * @return A pointer to the passed-in @ref Bmi instance.
     */
     Bmi* register_bmi(Bmi *model);
+
+    /*
+    * Bmi Extensions
+    */
+    /*
+     * Method 4 requires exposing the extension function in the public header
+     */
+    int get_extra_2(Bmi* , int*);
+
+    /*
+     * Method 3 uses an independent registration function per extension
+     */
+    int register_extra_bmi(Bmi_extra*);
+    /* end BMI extensions */
 
 #if defined(__cplusplus)
 }

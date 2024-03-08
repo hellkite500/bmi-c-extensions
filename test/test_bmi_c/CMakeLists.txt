@@ -13,6 +13,9 @@ endif()
 
 target_include_directories(testbmicmodel PRIVATE include)
 
+# Link bmi extensions
+target_link_libraries(testbmicmodel PRIVATE extra_extension)
+
 set_target_properties(testbmicmodel PROPERTIES VERSION ${PROJECT_VERSION})
 
 set_target_properties(testbmicmodel PROPERTIES PUBLIC_HEADER include/bmi_test_bmi_c.h)

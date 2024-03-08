@@ -909,3 +909,76 @@ Bmi* register_bmi(Bmi *model) {
 
     return model;
 }
+
+/*
+ * BMI Extensions
+ */
+
+/*
+ * Method 5, define exact function extension is looking for
+ * and let the linker do the work.
+ */
+int get_extra(struct Bmi *self, int *extra){
+    *extra = ((test_bmi_c_model *) self->data) -> num_time_steps + 111;
+    return BMI_SUCCESS;
+}
+
+int get_extra_2(struct Bmi *self, int *extra){
+    *extra = ((test_bmi_c_model *) self->data) -> num_time_steps + 222;
+    return BMI_SUCCESS;
+}
+
+Bmi_extra extra_ext;
+/*
+ * Note that for method 1 and 2, the register_bmi_extension* functions
+ * are external linkage (extern) functions in the bmi extension library
+ * so they do NOT need to be part of the model header/API, just defined
+ * here so they can link to the exension lib for defining this model's
+ * implementation.
+ */
+
+/*
+ * Method 1
+ */
+int register_bmi_extension(Extension* extension){
+    if( extension->type == EXTRA )
+     extension->extension.extra.get_extra = get_extra_2;
+    
+    return BMI_SUCCESS;
+}
+
+/*
+ * Method 2
+ * In either case below, the caller may not know the correct type
+ * to use.  Using the union, it can be checked by the caller with
+ * if( extension->get_extra != NULL ) though.
+ * 
+ * In the pointer type erasure method, the caller must know SOMEHOW
+ * what to cast to, this can be done via the extension->type enum.
+ * 
+ */
+
+int register_bmi_extension2(Extension* extension){
+
+    extension->type = EXTRA;
+    extra_ext.get_extra = get_extra_2;
+    extension->extension.extra = extra_ext;
+
+    extension->ext = (void*) &extra_ext;
+
+    return BMI_SUCCESS;
+}
+
+/*
+ * Method 3 -- stand alone extension with registration
+ * Migrating to central management, the bmi_extension lib would need
+ * a new ENUM type, and updated create_extension
+ * then this code would move to
+ * register_bmi_extension with a type check for the enum type
+ */
+int register_extra_bmi(Bmi_extra* ext){
+    ext->get_extra = get_extra_2;
+
+    return BMI_SUCCESS;
+}
+/* end BMI extensions */
