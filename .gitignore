@@ -6,3 +6,6 @@ cmake_build
 
 #ide
 .vscode/
+
+#ctest
+Testing/

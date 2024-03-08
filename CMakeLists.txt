@@ -27,6 +27,8 @@ FOREACH( extension ${SOURCES} )
    target_link_libraries(extendedbmi ${extension_lib})
 ENDFOREACH()
 
+add_subdirectory(test)
+
 set_target_properties(extendedbmi PROPERTIES VERSION ${PROJECT_VERSION})
 
 # TODO would need to put all extension headers into public headers...
