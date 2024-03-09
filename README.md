@@ -1,3 +1,5 @@
+![platform tests](https://github.com/hellkite500/bmi-c-extensions/actions/workflows/cmake-multi-platform.yml/badge.svg)
+
 # BMI Extensions
 
 A library for BMI extensions in C (and C++). Also includes an example 
